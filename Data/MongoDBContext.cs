@@ -12,22 +12,12 @@ namespace monitoramento_ambiental_mongodb.Data
         public MongoDBContext(IOptions<DataBaseSettings> options)
         {
             _settings = options.Value ?? throw new ArgumentNullException(nameof(options));
-            if (string.IsNullOrEmpty(_settings.ConnectionURI))
-                throw new ArgumentException("ConnectionURI cannot be null or empty", nameof(_settings.ConnectionURI));
+            if (string.IsNullOrEmpty(_settings.ConnectionString))
+                throw new ArgumentException("ConnectionString cannot be null or empty", nameof(_settings.ConnectionString));
             if (string.IsNullOrEmpty(_settings.DatabaseName))
                 throw new ArgumentException("DatabaseName cannot be null or empty", nameof(_settings.DatabaseName));
 
-            if (string.IsNullOrEmpty(_settings.ConnectionURI))
-            {
-                throw new InvalidOperationException("ConnectionURI não está configurado.");
-            }
-
-            if (string.IsNullOrEmpty(_settings.DatabaseName))
-            {
-                throw new InvalidOperationException("DatabaseName não está configurado.");
-            }
-
-            var client = new MongoClient(_settings.ConnectionURI);
+            var client = new MongoClient(_settings.ConnectionString);
             _database = client.GetDatabase(_settings.DatabaseName);
         }
 
