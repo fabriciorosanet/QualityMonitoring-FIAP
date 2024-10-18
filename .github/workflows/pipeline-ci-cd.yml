@@ -26,11 +26,11 @@ jobs:
         run: ls -R ./bin/Debug/net8.0
       - name: Build Docker image
         run: |
-          docker build -t wagnersimonetto/monitoramento_ambiental_mgdb:v1 .
+          docker build -t rosadeveloper/qualitymonitoring_fiap:latest .
       - name: Push Docker image
         run: |
           echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
-          docker push wagnersimonetto/monitoramento_ambiental_mgdb:v1
+          docker push rosadeveloper/qualitymonitoring_fiap:latest
 
   deploy-staging:
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy to Staging
         run: |
-          az webapp config container set --name my-staging-app --resource-group FIAP --container-image-name wagnersimonetto/monitoramento_ambiental_mgdb:v1
+          az webapp config container set --name my-staging-app --resource-group graduacao-fiap --container-image-name rosadeveloper/qualitymonitoring_fiap:latest
 
   deploy-production:
     runs-on: ubuntu-latest
@@ -54,4 +54,4 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy to Production
         run: |
-          az webapp config container set --name my-production-app --resource-group FIAP --container-image-name wagnersimonetto/monitoramento_ambiental_mgdb:v1
+          az webapp config container set --name my-production-app --resource-group graduacao-fiap --container-image-name rosadeveloper/qualitymonitoring_fiap:latest
