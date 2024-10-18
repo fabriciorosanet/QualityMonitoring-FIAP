@@ -26,11 +26,7 @@ jobs:
         run: ls -R ./bin/Debug/net8.0
       - name: Build Docker image
         run: |
-          docker build -t fabriciorosanet/qualitymonitoring_fiap:latest .  # Corrigido para apenas construir a imagem
-      - name: Push Docker image
-        run: |
-          echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
-          docker push fabriciorosanet/qualitymonitoring_fiap:latest
+          docker build -t qualitymonitoring_fiap:latest .  # Usando um nome de imagem local
 
   deploy-staging:
     runs-on: ubuntu-latest
@@ -42,7 +38,9 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy to Staging
         run: |
-          az webapp config container set --name my-staging-app --resource-group FIAP --container-image-name fabriciorosanet/qualitymonitoring_fiap:latest
+          # Criando e executando o container a partir da imagem local
+          docker run -d --name staging-container -p 8080:80 qualitymonitoring_fiap:latest
+          az webapp config container set --name my-staging-app --resource-group FIAP --container-image-name qualitymonitoring_fiap:latest
 
   deploy-production:
     runs-on: ubuntu-latest
@@ -54,4 +52,6 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy to Production
         run: |
-          az webapp config container set --name my-production-app --resource-group FIAP --container-image-name fabriciorosanet/qualitymonitoring_fiap:latest
+          # Criando e executando o container a partir da imagem local
+          docker run -d --name production-container -p 8081:80 qualitymonitoring_fiap:latest
+          az webapp config container set --name my-production-app --resource-group FIAP --container-image-name qualitymonitoring_fiap:latest
