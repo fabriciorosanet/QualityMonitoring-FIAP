@@ -1,32 +1,14 @@
 version: '3.8'
 
 services:
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb_container
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: backendfabriciorosa
-      MONGO_INITDB_ROOT_PASSWORD: KBJnUKKyy5eHb7GX
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-
-  app:
-    image: quality-monitoring-dotnet-image
-    container_name: dotnet_app_container
-    depends_on:
-      - mongodb
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__MongoDBConnection=mongodb://root:example@mongodb:27017 # String de conexão com MongoDB
-    ports:
-      - "5000:80" # Porta exposta do container da sua aplicação .NET
+  web:
     build:
       context: .
       dockerfile: Dockerfile
-
-volumes:
-  mongo-data:
-    driver: local
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    env_file:
+      - .env
+    command: ["dotnet", "QualityMonitoring-MongoDB.dll"]
+    restart: always
