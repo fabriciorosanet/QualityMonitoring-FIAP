@@ -1,7 +1,4 @@
-.env
-.bin
-.Debug
-.bin
-.bin\Debug
-.C:\Users\fabri\source\repos\projeto-fase6-fiap\QualityMonitoring-FIAP\bin
+env
+bin
+Debug
 bin/
