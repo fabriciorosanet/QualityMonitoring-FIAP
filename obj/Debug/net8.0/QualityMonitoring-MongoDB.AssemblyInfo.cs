@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QualityMonitoring-MongoDB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67774c49963c828dbde7cd454681b4859bd4f67f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d6706d0634322afcd198246894b888d7778fa7f")]
 [assembly: System.Reflection.AssemblyProductAttribute("QualityMonitoring-MongoDB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QualityMonitoring-MongoDB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
