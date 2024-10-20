@@ -21,5 +21,12 @@ RUN dotnet publish "./QualityMonitoring-MongoDB.csproj" -c $BUILD_CONFIGURATION 
 # Final image
 FROM base AS final
 WORKDIR /app
+
+# Copy the published files
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "QualityMonitoring-MongoDB.dll"]
+
+# Set environment variable for the profile
+ENV ASPNETCORE_ENVIRONMENT=Dev
+
+# Allow changing the profile via Docker command line or environment setting
+ENTRYPOINT ["dotnet", "QualityMonitoring-MongoDB.dll", "--environment", "${ASPNETCORE_ENVIRONMENT}"]
