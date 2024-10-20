@@ -53,7 +53,7 @@ Este projeto utiliza Azure DevOps para CI/CD, permitindo a integração contínu
 #### Staging: Após uma build bem-sucedida, a aplicação é implantada automaticamente no ambiente de staging.
 #### Produção: Após a aprovação das mudanças no ambiente de staging, as alterações são promovidas para o ambiente de produção.
 
-### Como Testar as Requisições
+### Como Testar as Requisições (validação)
 Você pode usar o Postman para testar as rotas da API. A coleção de requisições já está incluída no projeto.
 
 ### Docker
