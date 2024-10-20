@@ -19,4 +19,8 @@ jobs:
           dotnet-version: '8.0' 
 
       - name: Restore dependencies
+<<<<<<< HEAD
         run: dotnet restore
+=======
+        run: dotnet restore
+>>>>>>> 7b253fecdca767c0ba66f739b9b9449f84ee0b3a
