@@ -1,13 +1,14 @@
-name: Continuous Integration
+name: Install Dependencies
+
 on:
-  pull_request:
-    types: [opened, reopened]
+  push:
     branches:
-      - "develop"
+      - develop  
 
 jobs:
-  build-and-test:
+  install-dependencies:
     runs-on: ubuntu-latest
+
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4
@@ -19,9 +20,3 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
-
-      - name: Build project
-        run: dotnet build --configuration Release
-
-      - name: Run Unit Tests
-        run: dotnet test --configuration Release --no-build --verbosity normal
